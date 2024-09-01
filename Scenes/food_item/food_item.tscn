@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxmr0egddx2rj"]
+
+[ext_resource type="Script" path="res://Scenes/food_item/food_item.gd" id="1_41dkb"]
+[ext_resource type="Texture2D" uid="uid://dedstvgm25ijq" path="res://Assets/platforms_image.png" id="1_ipfpi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c0fut"]
+radius = 23.0217
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0dbgy"]
+radius = 72.0278
+
+[node name="food_item" type="StaticBody2D"]
+scale = Vector2(0.1, 0.1)
+script = ExtResource("1_41dkb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ipfpi")
+region_enabled = true
+region_rect = Rect2(219, 42.5, 55, 49)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_c0fut")
+
+[node name="food_detection_zone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="food_detection_zone"]
+shape = SubResource("CircleShape2D_0dbgy")
+debug_color = Color(0, 0.639216, 0.372549, 0.419608)
+
+[connection signal="body_entered" from="food_detection_zone" to="." method="_on_food_detection_zone_body_entered"]
