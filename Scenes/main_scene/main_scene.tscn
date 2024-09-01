@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://7ctrl1c3fvvb"]
+[gd_scene load_steps=3 format=3 uid="uid://7ctrl1c3fvvb"]
 
 [ext_resource type="Script" path="res://Scenes/main_scene/main_scene.gd" id="1_lfk46"]
+[ext_resource type="Script" path="res://Scenes/main_scene/grid_for_debugging.gd" id="2_yqxcm"]
 
 [node name="main_scene" type="Node2D"]
 script = ExtResource("1_lfk46")
@@ -10,3 +11,6 @@ script = ExtResource("1_lfk46")
 [node name="ants_manager" type="Node" parent="."]
 
 [node name="pheromone_manager" type="Node" parent="."]
+
+[node name="grid_for_debugging" type="Node2D" parent="."]
+script = ExtResource("2_yqxcm")

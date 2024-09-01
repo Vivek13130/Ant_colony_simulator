@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-AutoLoad="*res://Scenes/auto_load.gd"
+auto_load="*res://Scenes/auto_load.gd"
 
 [input]
 

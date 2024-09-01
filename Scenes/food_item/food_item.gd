@@ -12,4 +12,4 @@ func _process(delta):
 
 
 func _on_food_detection_zone_body_entered(body):
-	AutoLoad.set_ant_target_to_home(body)
+	auto_load.set_ant_target_to_home(body)

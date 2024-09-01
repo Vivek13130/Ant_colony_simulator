@@ -13,7 +13,7 @@ collision_mask = 0
 shape = SubResource("CircleShape2D_4tgo3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 0.745098)
 texture = ExtResource("1_fhjy4")
 region_enabled = true
 region_rect = Rect2(114, 100.5, 59, 60)

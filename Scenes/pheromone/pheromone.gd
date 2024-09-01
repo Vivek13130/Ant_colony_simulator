@@ -1,7 +1,7 @@
 extends Node2D
 
-var initial_strength = 1.0
-var decay_rate = 0.01
+var initial_strength = auto_load.PHEROMONE_STRENGTH
+var decay_rate = auto_load.PHEROMONE_DECAY_RATE
 
 var strength = initial_strength
 var sprite = null
