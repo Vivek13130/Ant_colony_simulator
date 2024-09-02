@@ -1,20 +1,23 @@
 [gd_scene load_steps=4 format=3 uid="uid://kf0pjimwbhpx"]
 
-[ext_resource type="Texture2D" uid="uid://vcp8fv0d02rj" path="res://Assets/ant_image.png" id="1_4fobo"]
 [ext_resource type="Script" path="res://Scenes/ant/ant.gd" id="1_o6pn7"]
+[ext_resource type="Texture2D" uid="uid://dvq6dvy7fyyec" path="res://Assets/ant__image.png" id="2_i5vsq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8x4xq"]
-radius = 30.0
+radius = 7.0
 
 [node name="ant" type="CharacterBody2D"]
-scale = Vector2(0.1, 0.1)
+rotation = -1.5709
 collision_mask = 8
 script = ExtResource("1_o6pn7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_4fobo")
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_i5vsq")
+region_rect = Rect2(-0.904907, 76.923, 501.787, 338.074)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 0.000734734
 shape = SubResource("CircleShape2D_8x4xq")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

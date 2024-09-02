@@ -2,7 +2,8 @@ extends CharacterBody2D
 
 
 #movement variables
-var speed := 50
+
+var speed := 1000
 var current_direction = Vector2.ZERO
 
 var time_since_last_change = 0.0
@@ -18,19 +19,27 @@ var food_found = null # a var to store the food found by an ant for debugging pu
 var fps_counter : int = 0 # to remove the lines from the ants that are not detecting the food now 
 
 const PHEROMONE_SCENE : PackedScene = preload("res://Scenes/pheromone/pheromone.tscn")
+var food_pheromone_manager_node
+var home_pheromone_manager_node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	food_pheromone_manager_node = get_tree().root.get_node("main_scene").get_node("food_pheromone_manager")
+	home_pheromone_manager_node = get_tree().root.get_node("main_scene").get_node("home_pheromone_manager")
 	pass
-	#randomize()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
+	fps_counter += 1;
 	
 	if ant_has_food:
-		drop_pheromones(delta)
+		if fps_counter >= auto_load.FOOD_PHEROMONE_DROP_RATE:
+			fps_counter = 0
+			drop_pheromones(delta , "food")
 	else :
+		if fps_counter >= auto_load.HOME_PHEROMONE_DROP_RATE:
+			fps_counter = 0
+			drop_pheromones(delta , "home")
 		detect_food()
 	
 	if target_position != null:
@@ -79,7 +88,7 @@ func move_randomly(delta) -> void:
 	
 	
 	# Apply velocity and movement
-	velocity = current_direction * speed
+	velocity = current_direction * speed * delta
 	move_and_slide()
 
 
@@ -103,11 +112,17 @@ func is_near_window_edge() -> void:
 		avoid_obstacle(0 , -window_margin)
 
 
-func drop_pheromones(delta):
-	var pheromone_instance = PHEROMONE_SCENE.instantiate()
-	pheromone_instance.position = $".".global_position
-	get_tree().root.get_node("main_scene").get_node("pheromone_manager").add_child(pheromone_instance)
+func drop_pheromones(delta, type : String):
+	var pheromone = auto_load.get_pheromone(type)
 	
+	pheromone.global_position = global_position
+	pheromone.visible = true
+	print("dropping pheromone  ", type , " at " , global_position)
+	
+	if type == "food" :
+		food_pheromone_manager_node.add_child(pheromone)
+	else:
+		home_pheromone_manager_node.add_child(pheromone)
 	
 
 func detect_food() -> void :

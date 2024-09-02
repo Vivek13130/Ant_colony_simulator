@@ -14,8 +14,8 @@ var food_scene = auto_load.FOOD_SCENE
 
 # storage 
 var food_items_grid = auto_load.food_items_grid # dictionary to store food_items positions in grids 
-var pheromones_home = auto_load.pheromones_home # home pheromones storage 
-var pheromones_food = auto_load.pheromones_food # food pheromones storage 
+var home_pheromones_grid = auto_load.home_pheromones_grid # home pheromones storage 
+var food_pheromones_grid = auto_load.food_pheromones_grid # food pheromones storage 
 var ants = auto_load.ants # list of all ant instances
 
 # variables 

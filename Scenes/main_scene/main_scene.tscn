@@ -6,11 +6,13 @@
 [node name="main_scene" type="Node2D"]
 script = ExtResource("1_lfk46")
 
+[node name="grid_for_debugging" type="Node2D" parent="."]
+script = ExtResource("2_yqxcm")
+
 [node name="food_manager" type="Node" parent="."]
 
 [node name="ants_manager" type="Node" parent="."]
 
-[node name="pheromone_manager" type="Node" parent="."]
+[node name="food_pheromone_manager" type="Node" parent="."]
 
-[node name="grid_for_debugging" type="Node2D" parent="."]
-script = ExtResource("2_yqxcm")
+[node name="home_pheromone_manager" type="Node" parent="."]

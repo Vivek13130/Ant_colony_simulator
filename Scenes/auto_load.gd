@@ -4,15 +4,25 @@ extends Node
 const FOOD_SCATTER_QUANTITY = 10
 const FOOD_SCATTER_RADIUS = 30
 
-const CELL_SIZE = 100 # screen is divided into grid 
+const CELL_SIZE = 50 # screen is divided into grid 
 
-const PHEROMONE_LIFETIME = 5.0
-const PHEROMONE_STRENGTH = 1.0
-const PHEROMONE_DECAY_RATE = PHEROMONE_STRENGTH / PHEROMONE_LIFETIME 
+
+const FOOD_PHEROMONE_STRENGTH = 1.0
+const HOME_PHEROMONE_STRENGTH = 1.0
+
+const FOOD_PHEROMONE_DECAY_RATE :float = 0.1
+const HOME_PHEROMONE_DECAY_RATE :float = 0.1
+
+# rate of dropping pheromones , ( 1 pheromone per x fps )
+const FOOD_PHEROMONE_DROP_RATE = 50
+const HOME_PHEROMONE_DROP_RATE = 50
 
 const FOOD_DETECTION_RADIUS = 100
 
 const DEBUGGING_COLOR :Color = Color(1, 0, 0, 0.5)
+
+const MAX_PHEROMONES_IN_POOL : int = 1000
+
 
 var home_base_position = null
 
@@ -20,17 +30,73 @@ var home_base_position = null
 const HOME_BASE_SCENE:PackedScene = preload("res://Scenes/home_base/home_base.tscn")
 const ANT_SCENE : PackedScene = preload("res://Scenes/ant/ant.tscn")
 const FOOD_SCENE : PackedScene = preload("res://Scenes/food_item/food_item.tscn")
-
+const PHEROMONE_SCENE : PackedScene = preload("res://Scenes/pheromone/pheromone.tscn")
 
 # storage 
 var food_items_grid = {} # Dictionary to store food_items positions in grids 
-var pheromones_home = {}  # Dictionary for home pheromones
-var pheromones_food = {}  # Dictionary for food pheromones
 var ants = [] # list of all ant instances
 
-func set_ant_target_to_home(body):
-	pass
+var food_pheromones_grid = {}  # Dictionary for food pheromones ( active )
+var home_pheromones_grid = {}  # Dictionary for home pheromones ( active )
+var food_pheromone_pool = [] # contains all initialized food pheromones , 
+var home_pheromone_pool = []  # contians all initialized home pheromones
+# these pheromones will later be activated and switched to a type either food or home pheromone
+
+const FOOD_PHEROMONE_COLOR = Color(0.5, 0.0, 0.5)  # (RGB: 51, 153, 204, Alpha: 0.5)
+const HOME_PHEROMONE_COLOR = Color(1.0, 1.0, 0.0)  # (RGB: 178, 127, 229, Alpha: 0.5)
 
 
 func world_pos_to_grid(vec2 : Vector2) -> Vector2:
 	return Vector2(floor(vec2.x / CELL_SIZE) , floor(vec2.y / CELL_SIZE))
+
+
+func initialize_pheromone(pheromone : Node2D ,strength : float , decay_rate:float, pheromone_type : String) -> void:
+	pheromone.strength = strength
+	pheromone.pheromone_type = pheromone_type
+	pheromone.decay_rate = decay_rate
+	pheromone.is_active = true
+	
+	print("pheromone initialized")
+	
+	if pheromone_type == "food":
+		pheromone.modulate = auto_load.FOOD_PHEROMONE_COLOR
+	elif pheromone_type == "home":
+		print("setting modulation ------")
+		pheromone.modulate = auto_load.HOME_PHEROMONE_COLOR
+
+
+func get_pheromone(pheromone_type : String) -> Node2D:
+	var pheromone : Node2D
+	
+	var type : String
+	var strength : int
+	var decay_rate : int
+	
+	if pheromone_type == "food" :
+		
+		type = "food"
+		strength = FOOD_PHEROMONE_STRENGTH
+		decay_rate = FOOD_PHEROMONE_DECAY_RATE
+		
+		if food_pheromone_pool.size() > 0:
+			pheromone = food_pheromone_pool.pop_back()
+		else:
+			pheromone = PHEROMONE_SCENE.instantiate()
+			
+	else :
+		
+		type = "home"
+		strength = HOME_PHEROMONE_STRENGTH
+		decay_rate = HOME_PHEROMONE_DECAY_RATE
+		
+		if home_pheromone_pool.size() > 0 : 
+			pheromone = home_pheromone_pool.pop_back()
+		else:
+			pheromone = PHEROMONE_SCENE.instantiate()
+	
+	initialize_pheromone(pheromone, strength , decay_rate , type)
+	return pheromone
+
+
+func reset_pheromone(pheromone) :
+	pheromone.is_active = false

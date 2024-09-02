@@ -1,20 +1,21 @@
 extends Node2D
 
-var initial_strength = auto_load.PHEROMONE_STRENGTH
-var decay_rate = auto_load.PHEROMONE_DECAY_RATE
+var pheromone_type : String
+var strength : float
+var decay_rate : float
+var is_active:bool = false
 
-var strength = initial_strength
 var sprite = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	sprite = $Sprite2D 
-
+	sprite = $"."
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	strength -= decay_rate * delta
-	sprite.modulate = Color(1,1,1, strength)
+	sprite.modulate = auto_load.HOME_PHEROMONE_COLOR
+	strength -= decay_rate 
 	if strength <= 0 :
+		print("pheromone deleted from the screen ")
 		queue_free()
 

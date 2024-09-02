@@ -1,14 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://d1bbbuww4p8j6"]
 
-[ext_resource type="Texture2D" uid="uid://dedstvgm25ijq" path="res://Assets/platforms_image.png" id="1_2bdgi"]
 [ext_resource type="Script" path="res://Scenes/pheromone/pheromone.gd" id="1_l34p2"]
+[ext_resource type="Texture2D" uid="uid://de44gktd2p5qb" path="res://Assets/circle_white.png" id="2_wrtdb"]
 
-[node name="Pheromone" type="Node2D"]
-scale = Vector2(0.5, 0.5)
+[node name="Pheromone" type="Sprite2D"]
+z_index = 10
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("2_wrtdb")
 script = ExtResource("1_l34p2")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(0.878431, 0, 0.905882, 1)
-texture = ExtResource("1_2bdgi")
-region_enabled = true
-region_rect = Rect2(112.813, 100.426, 60.7882, 61.4712)
