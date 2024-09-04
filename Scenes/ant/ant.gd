@@ -117,7 +117,7 @@ func drop_pheromones(delta, type : String):
 	
 	pheromone.global_position = global_position
 	pheromone.visible = true
-	print("dropping pheromone  ", type , " at " , global_position)
+#	print("dropping pheromone  ", type , " at " , global_position)
 	
 	if type == "food" :
 		food_pheromone_manager_node.add_child(pheromone)

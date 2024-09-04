@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://de44gktd2p5qb" path="res://Assets/circle_white.png" id="1_u1j7n"]
 
 [node name="food_item" type="Sprite2D"]
-modulate = Color(0, 1, 0, 1)
+modulate = Color(1, 1, 0, 1)
 scale = Vector2(0.015, 0.015)
 texture = ExtResource("1_u1j7n")
 region_rect = Rect2(110.758, 98.5627, 65.1967, 64.5758)
