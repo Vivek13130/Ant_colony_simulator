@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://kf0pjimwbhpx"]
+[gd_scene load_steps=5 format=3 uid="uid://kf0pjimwbhpx"]
 
 [ext_resource type="Script" path="res://Scenes/ant/ant.gd" id="1_o6pn7"]
 [ext_resource type="Texture2D" uid="uid://dvq6dvy7fyyec" path="res://Assets/ant__image.png" id="2_i5vsq"]
@@ -6,12 +6,6 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8x4xq"]
 radius = 7.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_6ml2p"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_3opyv"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_m0xgo"]
 
 [node name="ant" type="CharacterBody2D"]
 z_index = 1000
@@ -55,23 +49,3 @@ position = Vector2(0, -20)
 
 [node name="right" type="Marker2D" parent="marker_manager"]
 position = Vector2(0, -20)
-
-[node name="antenna_manager" type="Node2D" parent="."]
-
-[node name="left" type="Area2D" parent="antenna_manager"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="antenna_manager/left"]
-position = Vector2(-23, -21)
-shape = SubResource("CircleShape2D_6ml2p")
-
-[node name="center" type="Area2D" parent="antenna_manager"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="antenna_manager/center"]
-position = Vector2(0, -27)
-shape = SubResource("CircleShape2D_3opyv")
-
-[node name="right" type="Area2D" parent="antenna_manager"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="antenna_manager/right"]
-position = Vector2(23, -21)
-shape = SubResource("CircleShape2D_m0xgo")

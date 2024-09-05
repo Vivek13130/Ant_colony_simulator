@@ -14,7 +14,15 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	strength -= decay_rate 
-	sprite.modulate.a = strength
+	
+	var alpha 
+	if pheromone_type == "food" :
+		alpha = strength / auto_load.FOOD_PHEROMONE_STRENGTH
+	else:
+		alpha = strength / auto_load.HOME_PHEROMONE_STRENGTH
+		
+	sprite.modulate.a = alpha
+	
 	if strength <= 0 :
 		auto_load.reset_pheromone(self)
 
