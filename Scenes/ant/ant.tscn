@@ -1,13 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://kf0pjimwbhpx"]
+[gd_scene load_steps=5 format=3 uid="uid://kf0pjimwbhpx"]
 
 [ext_resource type="Script" path="res://Scenes/ant/ant.gd" id="1_o6pn7"]
 [ext_resource type="Texture2D" uid="uid://dvq6dvy7fyyec" path="res://Assets/ant__image.png" id="2_i5vsq"]
+[ext_resource type="Texture2D" uid="uid://de44gktd2p5qb" path="res://Assets/circle_white.png" id="3_ajo0h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8x4xq"]
 radius = 7.0
 
 [node name="ant" type="CharacterBody2D"]
-rotation = -1.5709
+z_index = 1000
 collision_mask = 8
 script = ExtResource("1_o6pn7")
 
@@ -16,19 +17,51 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_i5vsq")
 region_rect = Rect2(-0.904907, 76.923, 501.787, 338.074)
 
+[node name="food_in_ant_mouth" type="Sprite2D" parent="Sprite2D"]
+visible = false
+modulate = Color(1, 1, 0, 1)
+position = Vector2(0, -90)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_ajo0h")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 0.000734734
 shape = SubResource("CircleShape2D_8x4xq")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 emitting = false
-amount = 10
-lifetime = 0.1
+amount = 50
+lifetime = 0.2
 one_shot = true
 direction = Vector2(1, 1)
 spread = 180.0
 gravity = Vector2(0, 0)
-initial_velocity_min = 200.0
-initial_velocity_max = 200.0
+initial_velocity_min = 250.0
+initial_velocity_max = 250.0
+
+[node name="marker_manager" type="Node2D" parent="."]
+visible = false
+
+[node name="center" type="Marker2D" parent="marker_manager"]
+position = Vector2(0, -20)
+
+[node name="left" type="Marker2D" parent="marker_manager"]
+position = Vector2(0, -20)
+
+[node name="right" type="Marker2D" parent="marker_manager"]
+position = Vector2(0, -20)
+
+[node name="Node2D" type="Node2D" parent="."]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("3_ajo0h")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Node2D"]
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("3_ajo0h")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Node2D"]
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("3_ajo0h")

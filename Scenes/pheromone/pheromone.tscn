@@ -4,7 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://de44gktd2p5qb" path="res://Assets/circle_white.png" id="2_wrtdb"]
 
 [node name="Pheromone" type="Sprite2D"]
+visible = false
 z_index = 10
-scale = Vector2(0.02, 0.02)
+scale = Vector2(0.03, 0.03)
 texture = ExtResource("2_wrtdb")
 script = ExtResource("1_l34p2")

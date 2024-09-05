@@ -1,4 +1,4 @@
-extends Node2D
+extends Sprite2D
 
 var pheromone_type : String
 var strength : float
@@ -12,9 +12,9 @@ func _ready():
 	sprite = $"."
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	strength -= decay_rate 
+	sprite.modulate.a = strength
 	if strength <= 0 :
-		print("pheromone deleted from the screen ")
-		queue_free()
+		auto_load.reset_pheromone(self)
 

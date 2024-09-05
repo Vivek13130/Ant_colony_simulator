@@ -22,10 +22,11 @@ var ants = auto_load.ants # list of all ant instances
 var home_base_instance = null  # To store the home base
 var ants_spawn_position = null # this will store the position of home_base
 
+var initial_ants = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -33,7 +34,7 @@ func _process(delta):
 	handle_inputs(delta)
 	
 
-func handle_inputs(delta):
+func handle_inputs(_delta):
 	if Input.is_action_just_pressed("add_home_base"):
 		add_home_base()
 	
@@ -89,7 +90,7 @@ func remove_food_from_grid(food):
 
 func spawn_ant():
 	if ants_spawn_position != null :
-		var ants_position = get_global_mouse_position()
+#		var ants_position = get_global_mouse_position()
 		var ant_instance = auto_load.ANT_SCENE.instantiate()
 		ant_instance.position = ants_spawn_position
 		$ants_manager.add_child(ant_instance)
